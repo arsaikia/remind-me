@@ -1,0 +1,20 @@
+[
+    {
+        "name": "217. Contains Duplicate",
+        "link": "https://leetcode.com/problems/contains-duplicate/",
+        "solveCount": 0,
+        "lastUpdatedAt": "2023-06-10T01:10:20.111Z"
+    },
+    {
+        "name": "Two Sum",
+        "link": "https://leetcode.com/problems/contains-duplicate/",
+        "solveCount": 0,
+        "lastUpdatedAt": "2023-06-10T01:10:20.111Z"
+    },
+    {
+        "name": "Three Sum",
+        "link": "https://leetcode.com/problems/contains-duplicate/",
+        "solveCount": 1,
+        "lastUpdatedAt": "2023-06-15T01:10:20.111Z"
+    }
+]
