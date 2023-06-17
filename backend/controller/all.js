@@ -33,7 +33,25 @@ const addQuestion = asyncHandler(async (req, res, next) => {
     });
 });
 
+/*
+ * @desc     mark a question complete
+ * @route    POST /api/v1/question
+ * @access   Public
+ */
+
+const updateSolveCount = asyncHandler(async (req, res, next) => {
+    const oldQuestion = await Question.findById(req.query.id)
+    oldQuestion.solveCount = oldQuestion.solveCount+1
+    oldQuestion.lastUpdatedAt = new Date()
+    const question = await Question.findByIdAndUpdate(req.query.id, oldQuestion)
+    res.status(201).json({
+        success: true,
+        data: question,
+    });
+});
+
 export {
     getQuestions,
     addQuestion,
+    updateSolveCount,
 };
