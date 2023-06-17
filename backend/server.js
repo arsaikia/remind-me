@@ -19,7 +19,11 @@ const app = express();
 app.use(express.json());
 
 // Allow CORS
-app.use(cors());
+const BASE_URI = process.env.BASE_URI || "http://localhost:3000";
+const corsOptions = {
+    origin: BASE_URI // frontend URI (ReactJS)
+}
+app.use(cors(corsOptions));
 
 // Mount routers
 app.use('/questions', allQuestions);
