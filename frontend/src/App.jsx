@@ -27,7 +27,6 @@ const App = () => {
 
   return (
     <>
-    
     <div>
       <button type="submit" onClick={fetchAllQuestions}>Get Questions</button>
       <h2>All Questions</h2>

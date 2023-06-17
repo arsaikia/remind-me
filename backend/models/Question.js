@@ -1,16 +1,23 @@
 import mongoose from 'mongoose';
 
 const questionSchema = new mongoose.Schema({
-    // isSolved: {
-    //     type: Boolean,
-    //     default: false
-    // },
+
     name: {
         type: String,
         required: true,
         trim: true,
     },
     link: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    group: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    difficulty: {
         type: String,
         required: true,
         trim: true,

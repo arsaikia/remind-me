@@ -31,7 +31,7 @@ const Tab = ({ data }) => {
                         return (
                             <tr key={_id}>
                                 <td>
-                                    <a href={link}target="_blank" rel="noopener noreferrer">{name}</a>
+                                    <a href={`https://leetcode.com/problems/${link}`}target="_blank" rel="noopener noreferrer">{name}</a>
                                 </td>
                                 <td>{solveCount}</td>
                                 <td>{lastUpdatedAt}</td>
