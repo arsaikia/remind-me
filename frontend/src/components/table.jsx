@@ -1,6 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { markQuestionAsDone } from '../actions/actions';
+
 
 const Tab = ({ data }) => {
+
+    const dispatch = useDispatch();
+    const markAsDoneHandler = (id) => dispatch(markQuestionAsDone(id));
     
     if (!data.length) {
         return null;
@@ -20,11 +26,11 @@ const Tab = ({ data }) => {
                 {
                 data.map((question) => {
                     const {
+                        _id,
                         lastUpdatedAt,
                         link,
                         name,
                         solveCount,
-                        _id,
                     } = question;
                     
                     {
@@ -36,7 +42,7 @@ const Tab = ({ data }) => {
                                 <td>{solveCount}</td>
                                 <td>{lastUpdatedAt}</td>
                                 <td>
-                                    <button type="submit">
+                                    <button type="submit" onClick={() => markAsDoneHandler(_id)}>
                                         Mark Complete
                                     </button>
                                 </td>
