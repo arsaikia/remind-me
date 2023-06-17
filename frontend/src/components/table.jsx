@@ -1,10 +1,23 @@
 import React from 'react'
 
-const Tab = ({data}) => {
+const Tab = ({ data }) => {
+    
+    if (!data.length) {
+        return null;
+    }
 
     return (
-    <table>
-            {
+        <table>
+            <thead>
+                <tr>
+                    <th>Problem</th>
+                    <th>Solved Count</th>
+                    <th>Last Interaction</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
                 data.map((question) => {
                     const {
                         lastUpdatedAt,
@@ -16,18 +29,23 @@ const Tab = ({data}) => {
                     
                     {
                         return (
-                        <tr key={_id}>
-                            <td>{name}</td>
-                            <td>{solveCount}</td>
+                            <tr key={_id}>
                                 <td>
-                                    <a href={link}target="_blank" rel="noopener noreferrer">Link</a>
+                                    <a href={link}target="_blank" rel="noopener noreferrer">{name}</a>
                                 </td>
-                            <td>{lastUpdatedAt}</td>
-                        </tr>
+                                <td>{solveCount}</td>
+                                <td>{lastUpdatedAt}</td>
+                                <td>
+                                    <button type="submit">
+                                        Mark Complete
+                                    </button>
+                                </td>
+                            </tr>
                         )
                     }
                 })
-            }
+                }
+            </tbody>
     </table>
   )
 }
