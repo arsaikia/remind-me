@@ -5,7 +5,10 @@ import {
 } from "../actions/types"
 
 const initialState = {
-    allQuestions: [],
+    allQuestions: {
+        groups: [],
+        questions: {},
+    },
     solvedQuestions: [],
     todoQuestions: [],
 }

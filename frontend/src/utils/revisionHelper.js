@@ -14,9 +14,10 @@ const getQuestionsToReviseToday = (allSolvedQuestions) => {
 
       console.log(question.name, "\n \t toSolveNext: ", toSolveNext, "\n \t daysSinceLastSolve: ", daysSinceLastSolve);
 
-      const pastFourAm = new Date().getHours() > 4;
+        const pastFourAm = new Date().getHours() > 4;
+        console.log(pastFourAm);
 
-      if ((toSolveNext <= daysSinceLastSolve) && pastFourAm) {
+      if ((toSolveNext <= daysSinceLastSolve)) {
         doToday.push(question);
       }
     });
