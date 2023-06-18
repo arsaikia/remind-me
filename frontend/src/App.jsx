@@ -44,8 +44,12 @@ const App = () => {
         <h2>Questions</h2>
         <div>
           {
-            allQuestions.groups.map( group => <Tab data={allQuestions.questions[group]} group={group} />)
-          }
+            allQuestions.groups.map( group => <Tab
+              key={group}
+              data={allQuestions.questions[group]}
+              group={group}
+            />
+          )}
         </div>
       {/* <Tab data={allQuestions} /> */}
     </div>

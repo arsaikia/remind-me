@@ -19,7 +19,7 @@ const Tab = ({ data, group, isOpen, isRecap }) => {
     return (
     <div style={{padding: '4px 0px', width: '100%'}}>
             {group && (
-                <button {...getToggleProps()} class="button-6">
+                <button {...getToggleProps()} className="button-6">
                     {(isExpanded) ? `${group} 🔼` : `${group} 🔽`}
                 </button>
             )}
@@ -42,19 +42,21 @@ const Tab = ({ data, group, isOpen, isRecap }) => {
                     link,
                     name,
                     solveCount,
+                    difficulty,
                 } = question;
                 
                 {
                     return (
                         <tr key={_id}>
-                            <td style={{textAlign: 'left'}}>
+                            <td style={{ textAlign: 'left', paddingRight: '0.5rem' }}>
+                                <span>{ difficulty }</span>
                                 <a href={`https://leetcode.com/problems/${link}`}target="_blank" rel="noopener noreferrer">{name}</a>
                             </td>
                             <td>{solveCount}</td>
                             <td>{lastUpdatedAt.slice(0, 10)}</td>
                             <td >
-                                {solveCount === 0 && <button class="button-41" type="submit" onClick={() => markAsDoneHandler(_id)}>Done</button>}
-                                {(solveCount > 0 && isRecap) && <button class="button-41" type="submit" onClick={() => markAsDoneHandler(_id)}>Done</button>}
+                                {solveCount === 0 && <button className="button-41" type="submit" onClick={() => markAsDoneHandler(_id)}>Done</button>}
+                                {(solveCount > 0 && isRecap) && <button className="button-41" type="submit" onClick={() => markAsDoneHandler(_id)}>Done</button>}
                                 {(solveCount > 0 && !isRecap) && <span>🔥🔥🔥</span>}
                             </td>
                         </tr>
