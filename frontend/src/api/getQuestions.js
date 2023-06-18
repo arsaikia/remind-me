@@ -1,5 +1,6 @@
 import axios from 'axios';
 
 export function getQuestions() {
-  return axios.get('http://localhost:5050/questions');
+    console.log("hello: ", process.env.REACT_APP_API_BASE_URI)
+  return axios.get(`${process.env.REACT_APP_API_BASE_URI}/questions`);
 };
