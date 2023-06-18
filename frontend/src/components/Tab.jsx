@@ -48,16 +48,16 @@ const Tab = ({ data, group, isOpen, isRecap }) => {
                 {
                     return (
                         <tr key={_id}>
-                            <td style={{ textAlign: 'left', paddingRight: '0.5rem' }}>
-                                <span>{ difficulty }</span>
+                            <td style={{ textAlign: 'left'}}>
                                 <a href={`https://leetcode.com/problems/${link}`}target="_blank" rel="noopener noreferrer">{name}</a>
+                                <span style={{ marginLeft: '0.8rem', padding: '0.15rem 0.4rem', background: difficulty === 'Easy' ? 'lightseagreen' : difficulty === 'Medium' ? '#d5adcf' : 'indianred', borderRadius: '4px', color: 'white',  }}>{ difficulty }</span>
                             </td>
                             <td>{solveCount}</td>
                             <td>{lastUpdatedAt.slice(0, 10)}</td>
                             <td >
                                 {solveCount === 0 && <button className="button-41" type="submit" onClick={() => markAsDoneHandler(_id)}>Done</button>}
                                 {(solveCount > 0 && isRecap) && <button className="button-41" type="submit" onClick={() => markAsDoneHandler(_id)}>Done</button>}
-                                {(solveCount > 0 && !isRecap) && <span>🔥🔥🔥</span>}
+                                {(solveCount > 0 && !isRecap) && <span>{ solveCount > 5 ? '🔥🔥🔥' : solveCount > 3 ? '🔥🔥' : '🔥'}</span>}
                             </td>
                         </tr>
                     )

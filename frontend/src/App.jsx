@@ -2,8 +2,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getQuestions } from './actions/actions';
 import { groupBy } from './utils/groupBy'
 import { useState, useEffect } from 'react';
-import Tab from './components/table'
+import Tab from './components/Tab'
 import logo from './logo.png';
+
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Container } from './styles';
+import Navbar from './components/Navbar';
+
 
 const App = () => {
 
@@ -27,20 +32,21 @@ const App = () => {
   **************************************************************/
   
 
-  
-  /**************************************************************
-   * Returns JSX from here
-  **************************************************************/
+  const Todo = () => {
 
-  return (
-    <>
-    <img src={logo} style={{width: '80px', cursor: 'pointer'}} onClick={fetchAllQuestions} />
-    <div>
-      <h2>Today's</h2>
-      <Tab data={todoQuestions} isOpen isRecap />
-    </div>
+    return (
+      <>
+      <div>
+        <h2>Today's</h2>
+        <Tab data={todoQuestions} isOpen isRecap />
+      </div>
+    </>)
+  }
 
-    <div>
+  const All = () => {
+
+    return (
+      <div>
         <h2>Questions</h2>
         <div>
           {
@@ -51,9 +57,35 @@ const App = () => {
             />
           )}
         </div>
-      {/* <Tab data={allQuestions} /> */}
-    </div>
-    </>
+      </div>
+    )
+
+  }
+  
+  /**************************************************************
+   * Returns JSX from here
+  **************************************************************/
+
+
+  return (
+    <Router>
+      <Navbar />
+      {/* Reserved space taken by the absolute Navbar */}
+      <Container
+        width={"100%"}
+        height={"8vh"}
+      />
+
+      <Container width={'90%'} padding={'0 5%'}>
+        <Routes>
+        <Route path="/" element={ <Todo/>} />
+        <Route path="/all" element={ <All/>} />
+        </Routes>
+      </Container>
+      
+      
+    
+    </Router>
   );
 }
 
