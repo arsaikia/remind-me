@@ -8,8 +8,8 @@ export const updateTheme = (value) => {
     return { type: UPDATE_THEME, payload: value };
 }
 
-export const markQuestionAsDone = (id) => {
-    return { type: MARK_QUESTION_AS_DONE, payload: id };
+export const markQuestionAsDone = (value) => {
+    return { type: MARK_QUESTION_AS_DONE, payload: value };
 }
 
 export const userLogin = (value) => {

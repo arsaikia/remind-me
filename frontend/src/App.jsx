@@ -15,7 +15,7 @@ import Login from './pages/Login';
 
 const App = () => {
 
-  const [cookies, setCookie, removeCookie] = useCookies(['user-auth']);
+  const [cookies, setCookie, removeCookie] = useCookies(['userId', 'openTab']);
 
   // Get states using useSelector ( state->reducerName )
   const allQuestions = useSelector(state => state.questions.allQuestions);
@@ -59,7 +59,7 @@ const App = () => {
       <>
       <div>
         <h2>Today's</h2>
-        <Tab data={todoQuestions} isOpen isRecap />
+        <Tab data={todoQuestions} isOpen isRecap userId={userId} />
       </div>
     </>)
   }
@@ -75,6 +75,7 @@ const App = () => {
               key={group}
               data={allQuestions.questions[group]}
               group={group}
+              userId={userId}
             />
           )}
         </div>
