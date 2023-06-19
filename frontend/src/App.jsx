@@ -27,7 +27,9 @@ const App = () => {
   const userIdInCookie = cookies.userId;
   const userId = userIdInCookie || userIdInAuthStore;
 
-  console.log(userId);
+  const tabCookie = cookies.openTab;
+
+  console.log(tabCookie);
   
   // Fire actions using dispatch -> fires action -> Watcher saga handles rest
   const dispatch = useDispatch();
@@ -76,6 +78,8 @@ const App = () => {
               data={allQuestions.questions[group]}
               group={group}
               userId={userId}
+              isOpen={tabCookie === group}
+              tabCookie={tabCookie}
             />
           )}
         </div>

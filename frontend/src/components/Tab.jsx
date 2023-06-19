@@ -2,12 +2,14 @@ import React  from 'react';
 import { useDispatch } from 'react-redux';
 import { markQuestionAsDone } from '../actions/actions';
 import { useCollapse } from 'react-collapsed';
+import { useCookies } from 'react-cookie';
 
-const Tab = ({ data, group, isRecap, userId }) => {
+const Tab = ({ data, group, isRecap, userId, isOpen, tabCookie }) => {
+    const [cookies, setCookie, removeCookie] = useCookies(['openTab']);
 
 
     // To collapse a section
-    const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
+    const { getCollapseProps, getToggleProps, isExpanded } = useCollapse( { isExpanded: isOpen } );
 
     const dispatch = useDispatch();
     const markAsDoneHandler = (questionId) => {
@@ -27,8 +29,11 @@ const Tab = ({ data, group, isRecap, userId }) => {
     return (
     <div style={{padding: '4px 0px', width: '100%'}}>
             {group && (
-                <button {...getToggleProps()} className="button-6">
-                    {(isExpanded) ? `${group} 🔼` : `${group} 🔽`}
+                <button
+                    {...getToggleProps({ onClick: () => (tabCookie !== group) ? setCookie('openTab', group, { path: '/' }) : setCookie('openTab', null, { path: '/' }) })}
+                    className="button-6"
+                >
+                        {(isExpanded) ? `${group} 🔼` : `${group} 🔽`}
                 </button>
             )}
         <section {...getCollapseProps()}>
