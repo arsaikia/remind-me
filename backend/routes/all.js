@@ -7,7 +7,7 @@ import {
     updateSolveCount,
 } from '../controller/all.js';
 
-router.route('/').get(getQuestions);
+router.route('/:userId').get(getQuestions);
 router.route('/').post(addQuestion);
 router.route('/updatesolvecount').post(updateSolveCount);
 

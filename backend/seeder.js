@@ -1,7 +1,27 @@
 import fs from 'fs';
 import colors from 'colors';
-import { MongoDB } from './config/db.js';
 import dotenv from 'dotenv';
+
+import mongoose from 'mongoose';
+
+const MongoDB = async () => {
+    const MONGO_URI = 'mongodb+srv://admin:BuHPstzyufv8vaHk@prep-algo-dev.6ozmn1a.mongodb.net/?retryWrites=true&w=majority';
+
+    try {
+        const conn = await mongoose.connect(MONGO_URI, {
+            useUnifiedTopology: true,
+            useNewUrlParser: true,
+            useCreateIndex: true,
+        });
+
+        console.log(
+            `MongoDB Connected: ${conn.connection.host}`.cyan.underline
+        );
+    } catch (error) {
+        console.error(`Error: ${error.message}`.red.underline.bold);
+        process.exit(1);
+    }
+};
 
 // Load env vars
 dotenv.config();
@@ -20,8 +40,8 @@ const questions = JSON.parse(fs.readFileSync(`./_data/questions.json`, 'utf-8'))
 const importData = async () => {
     try {
         for (let idx = 0; idx < questions.length; idx++) {
-            const question = questions[idx];
-            await Question.create(question);
+            const { name, link, group, difficulty } = questions[idx];
+            await Question.create({ name, link, group, difficulty });
         }
 
         console.log('Data Imported...'.green.inverse);

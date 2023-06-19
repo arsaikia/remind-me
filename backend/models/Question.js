@@ -22,14 +22,10 @@ const questionSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    solveCount: {
-        type: Number,
-        required: true,
+    code: {
+        type: String,
+        required: false,
         trim: true,
-    },
-    lastUpdatedAt: {
-        type: Date,
-        default: Date.now,
     },
 });
 
