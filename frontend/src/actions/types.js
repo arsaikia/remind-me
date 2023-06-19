@@ -4,6 +4,10 @@ export const UPDATE_THEME = 'UPDATE_THEME';
 export const SET_DARK_MODE = 'SET_DARK_MODE';
 export const SET_LIGHT_MODE = 'SET_LIGHT_MODE';
 
+// Login user
+export const LOGIN = 'LOGIN';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+
 // Others
 export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const GET_ALL_QUESTIONS = 'GET_ALL_QUESTIONS';

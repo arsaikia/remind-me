@@ -1,7 +1,7 @@
-import { GET_QUESTIONS, MARK_QUESTION_AS_DONE, UPDATE_THEME } from "./types"
+import { GET_QUESTIONS, LOGIN, MARK_QUESTION_AS_DONE, UPDATE_THEME } from "./types"
 
-export const getQuestions = () => {
-    return { type: GET_QUESTIONS };
+export const getQuestions = (value) => {
+    return { type: GET_QUESTIONS, userId: value };
 }
 
 export const updateTheme = (value) => {
@@ -10,4 +10,8 @@ export const updateTheme = (value) => {
 
 export const markQuestionAsDone = (id) => {
     return { type: MARK_QUESTION_AS_DONE, payload: id };
+}
+
+export const userLogin = (value) => {
+    return { type: LOGIN, payload: value };
 }
