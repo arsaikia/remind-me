@@ -1,14 +1,22 @@
-import React from 'react';
+import React  from 'react';
 import { useDispatch } from 'react-redux';
 import { markQuestionAsDone } from '../actions/actions';
-import { useCollapse } from 'react-collapsed'
+import { useCollapse } from 'react-collapsed';
 
-const Tab = ({ data, group, isOpen, isRecap }) => {
+const Tab = ({ data, group, isRecap, userId }) => {
+
+
     // To collapse a section
-    const { getCollapseProps, getToggleProps, isExpanded } = useCollapse({ isExpanded: isOpen })
+    const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
 
     const dispatch = useDispatch();
-    const markAsDoneHandler = (id) => dispatch(markQuestionAsDone(id));
+    const markAsDoneHandler = (questionId) => {
+        if (userId === 'guest') {
+            return alert('Sign in to save progress');
+        }
+        dispatch(markQuestionAsDone({userId, questionId}));
+    };
+
     
     if (!data.length) {
         return <p>

@@ -14,11 +14,10 @@ import { getQuestions } from "../actions/actions";
 function* handleQuestionDone(action) {
     
     try {
-        yield call(setQuestionAsDone(action.payload));
+        yield call(setQuestionAsDone, action.payload);
+        yield put(getQuestions(action.payload.userId));
     } catch (error) {
         console.log("Error: ", action);
-    } finally {
-        yield put(getQuestions());
     }
 }
 
