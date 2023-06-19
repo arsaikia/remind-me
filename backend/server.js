@@ -7,6 +7,8 @@ import cors from 'cors';
 import { MongoDB } from './config/db.js';
 
 import { allQuestions } from './routes/all.js';
+import { authentication } from './routes/authentication.js';
+import { solveHistory } from './routes/solveHistory.js';
 
 dotenv.config();
 
@@ -26,12 +28,14 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Mount routers
+app.use('/authentication', authentication);
 app.use('/questions', allQuestions);
+app.use('/solveHistory', solveHistory);
 
 
 // Listen to the PORT
 const PORT = process.env.PORT || 5005;
 
 app.listen(PORT, () => {
-    return console.log(`Server sarted on PORT ${PORT}`.yellow.bold);
+    return console.log(`Server started on PORT ${PORT}`.yellow.bold);
 });
