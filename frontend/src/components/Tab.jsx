@@ -53,7 +53,7 @@ const Tab = ({ data, group, isOpen, isRecap }) => {
                                 <span style={{ marginLeft: '0.8rem', padding: '0.15rem 0.4rem', background: difficulty === 'Easy' ? 'lightseagreen' : difficulty === 'Medium' ? '#d5adcf' : 'indianred', borderRadius: '4px', color: 'white',  }}>{ difficulty }</span>
                             </td>
                             <td>{solveCount}</td>
-                            <td>{lastUpdatedAt.slice(0, 10)}</td>
+                            <td>{lastUpdatedAt}</td>
                             <td >
                                 {solveCount === 0 && <button className="button-41" type="submit" onClick={() => markAsDoneHandler(_id)}>Done</button>}
                                 {(solveCount > 0 && isRecap) && <button className="button-41" type="submit" onClick={() => markAsDoneHandler(_id)}>Done</button>}

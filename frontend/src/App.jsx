@@ -4,27 +4,48 @@ import { groupBy } from './utils/groupBy'
 import { useState, useEffect } from 'react';
 import Tab from './components/Tab'
 import logo from './logo.png';
+import { useCookies } from 'react-cookie';
 
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Container } from './styles';
 import Navbar from './components/Navbar';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
 
 
 const App = () => {
+
+  const [cookies, setCookie, removeCookie] = useCookies(['user-auth']);
 
   // Get states using useSelector ( state->reducerName )
   const allQuestions = useSelector(state => state.questions.allQuestions);
   const solvedQuestions = useSelector(state => state.questions.solvedQuestions);
   const todoQuestions = useSelector(state => state.questions.todoQuestions);
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  const userIdInAuthStore = useSelector(state => state.auth.userId);
+
+  const userIdInCookie = cookies.userId;
+  const userId = userIdInCookie || userIdInAuthStore;
+
+  console.log(userId);
   
   // Fire actions using dispatch -> fires action -> Watcher saga handles rest
   const dispatch = useDispatch();
-  const fetchAllQuestions = () => dispatch(getQuestions());
+  const fetchAllQuestions = (userId) => dispatch(getQuestions(userId));
 
-  // Load all question when the app first loads
+  // Load all question when the app first loads/ user signs in
   useEffect(() => {
-    fetchAllQuestions();
-  }, [])
+    fetchAllQuestions(userId);
+  }, [userId])
+  
+  // Set cookie when user logs in
+  useEffect(() => {
+    if (!isAuthenticated) {
+      return
+    }
+    setCookie('userId', userId, { path: '/' });
+  }, [isAuthenticated])
+  
   
 
   /**************************************************************
@@ -78,8 +99,10 @@ const App = () => {
 
       <Container width={'90%'} padding={'0 5%'}>
         <Routes>
-        <Route path="/" element={ <Todo/>} />
-        <Route path="/all" element={ <All/>} />
+          <Route path="/" element={ <Todo/>} />
+          <Route path="/signup" element={ <Signup/>} />
+          <Route path="/login" element={ <Login/>} />
+          <Route path="/all" element={ <All/>} />
         </Routes>
       </Container>
       

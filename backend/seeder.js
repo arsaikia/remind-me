@@ -5,10 +5,10 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
 const MongoDB = async () => {
-    const MONGO_URI = 'mongodb+srv://admin:BuHPstzyufv8vaHk@prep-algo-dev.6ozmn1a.mongodb.net/?retryWrites=true&w=majority';
-
+    const MONGO_URI = '';
+    const MONGO_URI_PROD = '';
     try {
-        const conn = await mongoose.connect(MONGO_URI, {
+        const conn = await mongoose.connect(MONGO_URI_PROD, {
             useUnifiedTopology: true,
             useNewUrlParser: true,
             useCreateIndex: true,

@@ -11,7 +11,7 @@ import { getQuestionsToReviseToday } from "../utils/revisionHelper";
 // worker Saga
 function* fetchAllQuestions(action) {
 
-    const questionsDataResponse = yield call(getQuestions);
+    const questionsDataResponse = yield call(getQuestions, action.userId);
     const allQuestions = questionsDataResponse?.data?.data;
     const groupedQuestions = groupBy(allQuestions, question => question.group);
     const questionsGroupNames = Array.from(groupedQuestions.keys());
