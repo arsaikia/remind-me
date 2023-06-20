@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { CenteredFlex, Container, Flex } from "../styles";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../actions/actions";
 
 const loginSchema = Yup.object().shape({
@@ -17,6 +17,9 @@ const loginSchema = Yup.object().shape({
 const Login = (props) => {
 
     const navigate = useNavigate();
+
+    // Get states using useSelector ( state -> reducerName )
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
     // Fire actions using dispatch -> fires action -> Watcher saga handles rest
     const dispatch = useDispatch();
@@ -32,13 +35,20 @@ const Login = (props) => {
         }, 400)
 
         logUserIn(values);
-    
-        // navigate('/');
     }
+
+    useEffect(() => {
+        if (isAuthenticated) {
+           navigate('/');
+        } else {
+            console.error('Sign up failed.')
+        }
+    }, [isAuthenticated])
+    
     
     return (
-        <CenteredFlex height="60vh">
-            <Container width="auto" border="1px solid grey" padding="20px">
+        <CenteredFlex minHeight="60vh">
+            <Container minWidth="auto" border="1px solid grey" padding="20px">
                 <h1>Login</h1>
                 <Formik
                 initialValues={{ email: "", password: "" }}
@@ -51,13 +61,13 @@ const Login = (props) => {
                             <Container>
                                  <label>
                                 Email:   <Field type="email" name="email" />
-                                <ErrorMessage name="email" component="div" />
+                                <ErrorMessage className='error' name="email" component="div" />
                                 </label>
                             </Container>
                             <Container>
                                 <label>
                                 Password:   <Field type="password" name="password" />
-                                <ErrorMessage name="password" component="div" />
+                                <ErrorMessage className='error' name="password" component="div" />
                                 </label>
                             </Container>
                             <button type="submit" disabled={isSubmitting}>

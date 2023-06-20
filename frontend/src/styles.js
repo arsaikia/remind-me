@@ -2,7 +2,9 @@ import styled from 'styled-components';
 
 const Container = styled.div`
     width: ${({width}) => width || 'auto'};
+    min-width: ${({minWidth}) => minWidth || 'auto'};
     height: ${({height}) => height || 'auto'};
+    min-height: ${({minHeight}) => minHeight || 'auto'};
     background-color: ${({bg}) => bg || 'none'};
     background: ${({background}) => background || 'none'};
     z-index: ${({zIndex}) => zIndex || 1};
@@ -10,6 +12,7 @@ const Container = styled.div`
     top: ${({top}) => top || 'auto'};
     border: ${({border}) => border || 'none'};
     padding: ${({padding}) => padding || 'auto'};
+    box-shadow: ${({boxShadow}) => boxShadow || 'none'};
 
 `;
 
