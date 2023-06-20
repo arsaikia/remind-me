@@ -29,8 +29,6 @@ const App = () => {
 
   const tabCookie = cookies.openTab;
 
-  console.log(tabCookie);
-  
   // Fire actions using dispatch -> fires action -> Watcher saga handles rest
   const dispatch = useDispatch();
   const fetchAllQuestions = (userId) => dispatch(getQuestions(userId));

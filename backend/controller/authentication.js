@@ -11,23 +11,19 @@ import { v4 as uuid } from 'uuid';
 
 const signupUser = asyncHandler(async (req, res, next) => {
 
-    console.log(req.body);
-    const { firstName, lastName, email, password } = req.body; 
+    const { firstName, lastName, email, password } = req.body;
     
     // create a user a new user
-    const user = new User({
+    const user = await User.create({
         firstName,
         lastName,  
         email,
         password,
     });
         
-    // save the user to database
-    user.save(function(err) {
-         if (err) {
-            return next(new ErrorResponse(`Error Signing up!`, 500));
-        }
-    });
+    if (!user) {
+        return next(new Error(`Signup error`, 400));
+    }
     
     res.status(200).json({ success: true, data: { userId: user._id } });
 });

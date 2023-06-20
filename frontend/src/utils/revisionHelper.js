@@ -12,11 +12,11 @@ const getQuestionsToReviseToday = (allSolvedQuestions) => {
         const idx = solvedCount < revisionSequence.length ? solvedCount : (revisionSequence.length - 1)
         const toSolveNext = revisionSequence[idx];
 
-        console.log("first", idx);
+        // console.log("first", idx);
 
         const daysSinceLastSolve = (new Date() - new Date(question.lastUpdatedAt)) / (1000 * 60 * 60 * 24);
 
-        console.log(question.name, "\n \t toSolveNext: ", toSolveNext, "\n \t daysSinceLastSolve: ", daysSinceLastSolve);
+        // console.log(question.name, "\n \t toSolveNext: ", toSolveNext, "\n \t daysSinceLastSolve: ", daysSinceLastSolve);
 
             // const pastFourAm = new Date().getHours() > 4;
 
