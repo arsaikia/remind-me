@@ -11,7 +11,7 @@ const Navbar = () => {
   const loc = useLocation();
   const navigate = useNavigate();
 
-  const [cookies, setCookie, removeCookie] = useCookies(['userId', 'openTab']);
+  const [cookies, setCookie, removeCookie] = useCookies(['userId', 'name']);
   
   // Get states using useSelector ( state->reducerName )
   const userAuthState = useSelector(state => state.auth);
