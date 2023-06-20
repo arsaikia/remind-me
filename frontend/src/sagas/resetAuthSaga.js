@@ -7,7 +7,7 @@ import {
   RESET_AUTH_SUCCESS,
 } from "../actions/types";
 // worker Saga
-function* resetAuthHandler(action) {
+function* resetAuthHandler() {
     yield put({type: RESET_AUTH_SUCCESS})
 }
 

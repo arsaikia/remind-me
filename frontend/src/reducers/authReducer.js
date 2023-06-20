@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, SIGNUP_SUCCESS } from '../actions/types'
+import { LOGIN_SUCCESS, RESET_AUTH_SUCCESS, SIGNUP_SUCCESS } from '../actions/types'
 
 const initialState = {
     isSignedUp: false,
@@ -20,6 +20,10 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.payload,
+            }
+        case RESET_AUTH_SUCCESS:
+            return {
+                ...initialState,
             }
 
         default:
