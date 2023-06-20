@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+import { NavLink } from "react-router-dom";
 
 const Container = styled.div`
     width: ${({width}) => width || 'auto'};
+    max-width: ${({maxWidth}) => maxWidth || 'auto'};
     min-width: ${({minWidth}) => minWidth || 'auto'};
     height: ${({height}) => height || 'auto'};
     min-height: ${({minHeight}) => minHeight || 'auto'};
@@ -33,11 +35,32 @@ const CenteredFlex = (props) => (
     />
 )
 
+const StyledNavLink = styled(NavLink)`
+    padding: ${({padding}) => padding || 'auto'};
+    text-decoration: none;
+    color: inherit;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+    text-decoration: none;
+}
+`;
+
+const BlankButton = styled.button`
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+`;
+
 
 
 export {
     Container,
     Flex,
     CenteredFlex,
-
+    StyledNavLink,
+    BlankButton,
 }

@@ -4,6 +4,8 @@ const initialState = {
     isSignedUp: false,
     isAuthenticated: false,
     userId: 'guest',
+    firstName: '',
+    lastName: '',
 }
 
 const authReducer = (state = initialState, action) => {
@@ -11,14 +13,13 @@ const authReducer = (state = initialState, action) => {
         case SIGNUP_SUCCESS:
             return {
                 ...state,
-                isSignedUp: action.payload?.isSignedUp,
+                ...action.payload,
             }
 
         case LOGIN_SUCCESS:
             return {
                 ...state,
-                isAuthenticated: action.payload?.isAuthenticated,
-                userId: action.payload?.userId,
+                ...action.payload,
             }
 
         default:

@@ -7,6 +7,14 @@ body {
   /* padding: 10px 20px; */
 }
 
+p {
+  font-size: 1rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

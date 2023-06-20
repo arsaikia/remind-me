@@ -15,7 +15,7 @@ import Login from './pages/Login';
 
 const App = () => {
 
-  const [cookies, setCookie, removeCookie] = useCookies(['userId', 'openTab']);
+  const [cookies, setCookie, removeCookie] = useCookies(['userId', 'openTab', 'name']);
 
   // Get states using useSelector ( state->reducerName )
   const allQuestions = useSelector(state => state.questions.allQuestions);
@@ -23,6 +23,7 @@ const App = () => {
   const todoQuestions = useSelector(state => state.questions.todoQuestions);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const userIdInAuthStore = useSelector(state => state.auth.userId);
+  const userNameIdInAuthStore = useSelector(state => state.auth.firstName);
 
   const userIdInCookie = cookies.userId;
   const userId = userIdInCookie || userIdInAuthStore;
@@ -44,6 +45,7 @@ const App = () => {
       return
     }
     setCookie('userId', userId, { path: '/' });
+    setCookie('name', userNameIdInAuthStore, { path: '/' });
   }, [isAuthenticated])
   
   
