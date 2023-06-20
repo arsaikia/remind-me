@@ -3,10 +3,13 @@ import { useDispatch } from 'react-redux';
 import { markQuestionAsDone } from '../actions/actions';
 import { useCollapse } from 'react-collapsed';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const Tab = ({ data, group, isRecap, userId, isOpen, tabCookie }) => {
-    const [cookies, setCookie, removeCookie] = useCookies(['openTab']);
 
+    const navigate = useNavigate();
+
+    const [cookies, setCookie, removeCookie] = useCookies(['openTab']);
 
     // To collapse a section
     const { getCollapseProps, getToggleProps, isExpanded } = useCollapse( { isExpanded: isOpen } );
@@ -14,16 +17,18 @@ const Tab = ({ data, group, isRecap, userId, isOpen, tabCookie }) => {
     const dispatch = useDispatch();
     const markAsDoneHandler = (questionId) => {
         if (userId === 'guest') {
-            return alert('Sign in to save progress');
+            alert('Sign in to save progress');
+            return navigate('/login');
         }
         dispatch(markQuestionAsDone({userId, questionId}));
     };
 
-    
     if (!data.length) {
-        return <p>
-            🔥🔥🔥
-        </p>;
+        return <div>
+            <p>🔥🔥🔥</p>
+            <p>You have solved all questions for today!</p>
+            <button className="button-6" onClick={() => navigate('/all')}>See all questions</button>
+        </div>;
     }
 
     return (

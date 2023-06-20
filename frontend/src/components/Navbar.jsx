@@ -1,14 +1,46 @@
 import React from 'react'
-import { Container, Flex, CenteredFlex } from '../styles'
-import { NavLink } from "react-router-dom";
+import { Container, Flex, CenteredFlex, StyledNavLink, BlankButton } from '../styles'
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from '../logo.png'
+import { useSelector, useDispatch } from 'react-redux';
+import { useCookies } from 'react-cookie';
+import { getQuestions, resetAuthState } from '../actions/actions';
+
 
 const Navbar = () => {
+  const loc = useLocation();
+  const navigate = useNavigate();
+
+  const [cookies, setCookie, removeCookie] = useCookies(['userId', 'openTab']);
+  
+  // Get states using useSelector ( state->reducerName )
+  const userAuthState = useSelector(state => state.auth);
+  
+  // Fire actions using dispatch -> fires action -> Watcher saga handles rest
+  const dispatch = useDispatch();
+  const fetchAllQuestions = (userId) => dispatch(getQuestions(userId));
+  const resetAuth = () => dispatch(resetAuthState());
+
+  const userIdInCookie = cookies.userId;
+  const name = cookies.name;
+  const isUserAuthenticated = userIdInCookie;
+
+  /******************************************************************************
+   * HANDLER FUNCTIONS
+  ******************************************************************************/
+  const signOutHandler = () => {
+    removeCookie('userId');
+    removeCookie('name');
+    resetAuth();
+    fetchAllQuestions('guest');
+    navigate('/all');
+  }
 
   return (
     <CenteredFlex
       justifyContent="space-between"
       width={"100%"}
+      maxWidth={"100vw"}
       height={"8vh"}
       position={"fixed"}
       zIndex={1000}
@@ -40,24 +72,42 @@ const Navbar = () => {
       {/* Account */}
       <CenteredFlex
         justifyContent="space-around"
-        width="20%"
+        minWidth="20%"
         height="100%"
-        padding="0 1rem 0 0"
       >
 
         {/* Keeping only route here as lone route at middle of nav looks off */}
-        <NavLink to="/all">
-          <p>All Questions</p>
-        </NavLink>
+        {
+          loc.pathname !=="/all" && (
+            <StyledNavLink className="bold" padding="0 0.8rem" to="/all">
+              <p>Questions</p>
+            </StyledNavLink>
+          )
+        }
 
-        <NavLink to="/login">
-          <p>Login</p>
-        </NavLink>
+        {isUserAuthenticated && <p style={{ padding: "0 0.8rem" }}>
+          {`Hi, ${name}`}
+        </p>}
 
-        <NavLink to="/signup">
-          <p>Sign Up</p>
-        </NavLink>
-        
+        {isUserAuthenticated && <BlankButton className="bold" onClick={signOutHandler}>
+          Sign Out
+        </BlankButton>}
+
+        {
+          !isUserAuthenticated && loc.pathname !=="/login" && (
+            <StyledNavLink className="bold" padding="0 0.8rem" to="/login">
+              <p>Login</p>
+            </StyledNavLink>
+          )
+        }
+
+        {
+          !isUserAuthenticated && loc.pathname !=="/signup" && (
+            <StyledNavLink className="bold" padding="0 0.8rem" to="/signup">
+              <p>Signup</p>
+            </StyledNavLink>
+          )
+        }
       </CenteredFlex>
     </CenteredFlex>
   )

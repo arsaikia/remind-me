@@ -7,6 +7,8 @@ export const SET_LIGHT_MODE = 'SET_LIGHT_MODE';
 // Login user
 export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const RESET_AUTH = 'RESET_AUTH';
+export const RESET_AUTH_SUCCESS = 'RESET_AUTH_SUCCESS';
 
 // Signup user
 export const SIGNUP = 'SIGNUP';

@@ -12,11 +12,15 @@ import { useCookies } from 'react-cookie';
 // worker Saga
 function* loginHandler(action) {
     const questionsDataResponse = yield call(login, action.payload);
+    const { userId, firstName, lastName } = questionsDataResponse?.data?.data;
+    console.log(questionsDataResponse);
     yield put({
         type: LOGIN_SUCCESS,
         payload: {
             isAuthenticated: questionsDataResponse.status === 200,
-            userId: questionsDataResponse?.data?.data.userId,
+            userId,
+            firstName,
+            lastName,
         }
     })
 
