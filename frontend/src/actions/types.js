@@ -8,6 +8,10 @@ export const SET_LIGHT_MODE = 'SET_LIGHT_MODE';
 export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 
+// Signup user
+export const SIGNUP = 'SIGNUP';
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+
 // Others
 export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const GET_ALL_QUESTIONS = 'GET_ALL_QUESTIONS';

@@ -1,4 +1,4 @@
-import { GET_QUESTIONS, LOGIN, MARK_QUESTION_AS_DONE, UPDATE_THEME } from "./types"
+import { GET_QUESTIONS, LOGIN, MARK_QUESTION_AS_DONE, SIGNUP, UPDATE_THEME } from "./types"
 
 export const getQuestions = (value) => {
     return { type: GET_QUESTIONS, userId: value };
@@ -14,4 +14,8 @@ export const markQuestionAsDone = (value) => {
 
 export const userLogin = (value) => {
     return { type: LOGIN, payload: value };
+}
+
+export const userSignup = (value) => {
+    return { type: SIGNUP, payload: value };
 }
