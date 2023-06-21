@@ -14,6 +14,7 @@ const Container = styled.div`
     top: ${({top}) => top || 'auto'};
     border: ${({border}) => border || 'none'};
     padding: ${({padding}) => padding || 'auto'};
+    background: ${({background}) => background && background};
     box-shadow: ${({boxShadow}) => boxShadow || 'none'};
 
 `;
