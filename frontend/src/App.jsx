@@ -11,6 +11,7 @@ import { Container } from './styles';
 import Navbar from './components/Navbar';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import Playground from './pages/Playground';
 
 
 const App = () => {
@@ -107,7 +108,8 @@ const App = () => {
           <Route path="/" element={ <Todo/>} />
           <Route path="/signup" element={ <Signup/>} />
           <Route path="/login" element={ <Login/>} />
-          <Route path="/all" element={ <All/>} />
+          <Route path="/all" element={<All />} />
+          <Route path="/playground" element={ <Playground />} />
         </Routes>
       </Container>
       
