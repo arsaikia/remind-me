@@ -8,6 +8,7 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import DifficultyBadge from './DifficultyBadge';
 import DifficultyDot from './DifficultyDot';
 import { UnstyledLink } from '../../styles';
+import TabRow from './TabRow';
 
 const Tab = (props) => {
 
@@ -38,7 +39,7 @@ const Tab = (props) => {
         return <div>
             <p>🔥🔥🔥</p>
             <p>You have solved all questions for today!</p>
-            <button className="button-6" onClick={() => navigate('/all')}>See all questions</button>
+            <button className="button-6" onClick={() => navigate('/')}>See all questions</button>
         </div>;
     }
 
@@ -65,33 +66,11 @@ const Tab = (props) => {
                     <tbody>
                         {
                             data.map((question) => {
-                                const {
-                                    _id,
-                                    lastUpdatedAt,
-                                    link,
-                                    name,
-                                    solveCount,
-                                    difficulty,
-                                } = question;
-
-                                {
-                                    return (
-                                        <tr key={_id}>
-                                            <td style={{ textAlign: 'left' }}>
-                                                <DifficultyDot text={difficulty} />
-                                                <UnstyledLink href={`https://leetcode.com/problems/${link}`} target="_blank" rel="noopener noreferrer">{name}</UnstyledLink>
-                                                <DifficultyBadge text={difficulty} />
-                                            </td>
-                                            {!isMobile && <td>{solveCount}</td>}
-                                            {!isMobile && <td>{lastUpdatedAt}</td>}
-                                            <td >
-                                                {solveCount === 0 && <button className="button-41" type="submit" onClick={() => markAsDoneHandler(_id)}>Done</button>}
-                                                {(solveCount > 0 && isRecap) && <button className="button-41" type="submit" onClick={() => markAsDoneHandler(_id)}>Done</button>}
-                                                {(solveCount > 0 && !isRecap) && <span>{solveCount > 5 ? '🔥🔥🔥' : solveCount > 3 ? '🔥🔥' : '🔥'}</span>}
-                                            </td>
-                                        </tr>
-                                    )
-                                }
+                                const tabRowProps = { ...question, markAsDoneHandler, isRecap };
+                                return <TabRow
+                                    key={question._id}
+                                    {...tabRowProps}
+                                />
                             })
                         }
                     </tbody>

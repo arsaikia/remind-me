@@ -12,10 +12,10 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const [cookies, setCookie, removeCookie] = useCookies(['userId', 'name']);
-  
+
   // Get states using useSelector ( state->reducerName )
   const userAuthState = useSelector(state => state.auth);
-  
+
   // Fire actions using dispatch -> fires action -> Watcher saga handles rest
   const dispatch = useDispatch();
   const fetchAllQuestions = (userId) => dispatch(getQuestions(userId));
@@ -33,7 +33,7 @@ const Navbar = () => {
     removeCookie('name');
     resetAuth();
     fetchAllQuestions('guest');
-    navigate('/all');
+    navigate('/');
   }
 
   return (
@@ -43,7 +43,7 @@ const Navbar = () => {
       maxWidth={"100vw"}
       height={"8vh"}
       position={"fixed"}
-      zIndex={1000}
+      zindex={1000}
       top={'0'}
       bg={"#ffff"}
       border={'1px solid #dee7f9'}
@@ -59,7 +59,7 @@ const Navbar = () => {
           <img src={logo} style={{ width: '60%', height: 'auto', cursor: 'pointer' }} onClick={() => console.log("clicked on logo!")} />
         </NavLink>
       </Container>
-      
+
       {/* Routes */}
       <CenteredFlex
         justifyContent="space-around"
@@ -75,12 +75,11 @@ const Navbar = () => {
         minWidth="20%"
         height="100%"
       >
-
         {/* Keeping only route here as lone route at middle of nav looks off */}
         {
-          loc.pathname !=="/all" && (
-            <StyledNavLink className="bold" padding="0 0.8rem" to="/all">
-              <p>Questions</p>
+          loc.pathname !== "/todo" && (
+            <StyledNavLink className="bold" padding="0 0.8rem" to="/todo">
+              <p>Todo</p>
             </StyledNavLink>
           )
         }
@@ -94,7 +93,7 @@ const Navbar = () => {
         </BlankButton>}
 
         {
-          !isUserAuthenticated && loc.pathname !=="/login" && (
+          !isUserAuthenticated && loc.pathname !== "/login" && (
             <StyledNavLink className="bold" padding="0 0.8rem" to="/login">
               <p>Login</p>
             </StyledNavLink>
@@ -102,7 +101,7 @@ const Navbar = () => {
         }
 
         {
-          !isUserAuthenticated && loc.pathname !=="/signup" && (
+          !isUserAuthenticated && loc.pathname !== "/signup" && (
             <StyledNavLink className="bold" padding="0 0.8rem" to="/signup">
               <p>Signup</p>
             </StyledNavLink>

@@ -211,3 +211,7 @@ caption {
 .error{
   color: red;
 }
+
+.tooltip-z-idx {
+  z-index: 9999;
+}
