@@ -9,23 +9,20 @@ const Container = styled.div`
     min-height: ${({ minHeight }) => minHeight || 'auto'};
     background-color: ${({ bg }) => bg || 'none'};
     background: ${({ background }) => background || 'none'};
-    z-index: ${({ zIndex }) => zIndex || 1};
+    z-index: ${({ zindex }) => zindex || 1};
     position: ${({ position }) => position || 'auto'};
     top: ${({ top }) => top || 'auto'};
     border: ${({ border }) => border || 'none'};
     padding: ${({ padding }) => padding || 'auto'};
     background: ${({ background }) => background && background};
     box-shadow: ${({ boxShadow }) => boxShadow || 'none'};
-
 `;
-
 
 const Flex = styled(Container)`
     display: flex;
     flex-direction: ${({ direction }) => direction || 'row'};
     justify-content: ${({ justifyContent }) => justifyContent && justifyContent};
     align-items: ${({ alignItems }) => alignItems && alignItems};
-
 `;
 
 const CenteredFlex = (props) => (

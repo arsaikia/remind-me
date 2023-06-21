@@ -16,6 +16,7 @@ import Playground from "./pages/Playground";
 import Error from "./pages/Error";
 import Todo from "./components/Todo";
 import All from "./components/All";
+import AllRoutes from "./AllRoutes";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["userId", "openTab", "name"]);
@@ -72,15 +73,7 @@ function App() {
       />
 
       <Container width="90%" padding="0 5%">
-        <Routes>
-          <Route path="/" element={<Todo {...todoProps} />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/all" element={<All {...allQuestionsProps} />} />
-          <Route path="/playground" element={<Playground />} />
-          <Route path="/404" element={<Error />} />
-          <Route path="*" element={<Navigate replace to="/404" />} />
-        </Routes>
+        <AllRoutes allQuestionsProps={allQuestionsProps} todoProps={todoProps} />
       </Container>
 
     </Router>
