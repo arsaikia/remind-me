@@ -1,10 +1,14 @@
 body {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* padding: 10px 20px; */
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+
 }
 
 p {
@@ -13,6 +17,10 @@ p {
 
 .bold {
   font-weight: bold;
+
+  @media screen and (max-width: 768px) {
+    font-weight: 600;
+  }
 }
 
 code {
