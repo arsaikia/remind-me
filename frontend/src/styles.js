@@ -7,7 +7,7 @@ const Container = styled.div`
     min-width: ${({ minWidth }) => minWidth || 'auto'};
     height: ${({ height }) => height || 'auto'};
     min-height: ${({ minHeight }) => minHeight || 'auto'};
-    background-color: ${({ bg }) => bg || 'none'};
+    background-color: ${({ backgroundColor }) => backgroundColor || 'none'};
     background: ${({ background }) => background || 'none'};
     z-index: ${({ zindex }) => zindex || 1};
     position: ${({ position }) => position || 'auto'};
@@ -16,6 +16,9 @@ const Container = styled.div`
     padding: ${({ padding }) => padding || 'auto'};
     background: ${({ background }) => background && background};
     box-shadow: ${({ boxShadow }) => boxShadow || 'none'};
+    overflow: ${({ overflow }) => overflow && overflow};
+    overflow-x: ${({ overflowX }) => overflowX && overflowX};
+    overflow-y: ${({ overflowY }) => overflowY && overflowY};
 `;
 
 const Flex = styled(Container)`
