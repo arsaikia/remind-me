@@ -66,11 +66,7 @@ function App() {
   return (
     <Router>
       <Navbar />
-      {/* Reserved space taken by the absolute Navbar */}
-      <Container
-        width="100%"
-        height="8vh"
-      />
+
 
       <Container width="90%" padding="0 5%">
         <AllRoutes allQuestionsProps={allQuestionsProps} todoProps={todoProps} />
