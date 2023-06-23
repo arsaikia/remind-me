@@ -6,7 +6,7 @@ import { v4 as UUID_V4 } from 'uuid';
 import mongoose from 'mongoose';
 
 const MongoDB = async () => {
-    const MONGO_URI = 'mongodb+srv://admin:BuHPstzyufv8vaHk@prep-algo-dev.6ozmn1a.mongodb.net/?retryWrites=true&w=majority';
+    const MONGO_URI = '';
     const MONGO_URI_PROD = '';
     try {
         const conn = await mongoose.connect(MONGO_URI, {
@@ -42,12 +42,13 @@ const importData = async () => {
     try {
         for (let idx = 0; idx < questions.length; idx++) {
             const {
+                _id,
                 name,
                 link,
                 group,
                 difficulty
             } = questions[idx];
-            await Question.create({ _id: UUID_V4(), name, link, group, difficulty });
+            await Question.create({ _id, name, link, group, difficulty });
         }
 
         console.log('Data Imported...'.green.inverse);
@@ -60,7 +61,7 @@ const importData = async () => {
 // Delete data
 const deleteData = async () => {
     try {
-        await StoreProducts.destroy({ where: {} });
+        await Question.destroy({ where: {} });
 
         console.log('Data Destroyed...'.red.inverse);
         process.exit();
