@@ -1,21 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useCookies } from "react-cookie";
-
-import {
-  Route, Navigate, BrowserRouter as Router, Routes,
-} from "react-router-dom";
-import Tab from "./components/Tab";
+import { BrowserRouter as Router } from "react-router-dom";
 import { getQuestions } from "./actions/actions";
 import { Container } from "./styles";
 import Navbar from "./components/Navbar";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
-import Playground from "./pages/Playground";
-// import AllRoutes from "./AllRoutes";
-import Error from "./pages/Error";
-import Todo from "./components/Todo";
-import All from "./components/All";
 import AllRoutes from "./AllRoutes";
 
 function App() {
@@ -52,26 +41,26 @@ function App() {
     setCookie("name", userNameIdInAuthStore, { path: "/" });
   }, [isAuthenticated]);
 
-  /** ************************************************************
+  /**************************************************************
    * Handler Functions
-  ************************************************************* */
+  ***************************************************************/
 
   const allQuestionsProps = { allQuestions, userId, tabCookie };
   const todoProps = { todoQuestions, isOpen: true, isRecap: true, userId };
 
-  /** ************************************************************
+  /***************************************************************
    * Returns JSX from here
-  ************************************************************* */
+  ****************************************************************/
 
   return (
     <Router>
       <Navbar />
-
-
       <Container width="90%" padding="0 5%">
-        <AllRoutes allQuestionsProps={allQuestionsProps} todoProps={todoProps} />
+        <AllRoutes
+          allQuestionsProps={allQuestionsProps}
+          todoProps={todoProps}
+        />
       </Container>
-
     </Router>
   );
 }

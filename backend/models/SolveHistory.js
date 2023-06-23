@@ -1,14 +1,17 @@
 import mongoose from 'mongoose';
+import { v4 as UUID_V4 } from 'uuid';
 
 const solveHistorySchema = new mongoose.Schema({
-
+    _id: { type: String, default: UUID_V4 },
     userId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
+        default: UUID_V4,
         ref: 'User',
         required: true,
     },
     questionId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
+        default: UUID_V4,
         ref: 'Question',
         required: true,
     },
