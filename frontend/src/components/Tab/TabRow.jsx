@@ -39,7 +39,7 @@ const TabRow = (props) => {
           <Tooltip
             id={link}
             className='tooltip-z-idx'
-            place="bottom"
+            place="top"
             // variant={ }
             content={" ⭐ Go to leetcode ⭐ "}
           />
