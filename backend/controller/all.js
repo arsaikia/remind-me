@@ -12,7 +12,7 @@ import SolveHistory from '../models/SolveHistory.js';
 
 const getQuestions = asyncHandler(async (req, res, next) => {
     const { userId } = req.params;
-    const questions = await Question.find();
+    const questions = await Question.find({});
     const solveCountForUser = (userId === 'guest')
         ? SolveHistory.find()
         : await SolveHistory.find({ userId });
@@ -28,7 +28,7 @@ const getQuestions = asyncHandler(async (req, res, next) => {
     for (let idx = 0; idx < questions.length; idx++) {
         const question = questions[idx];
         const { _id: questionId } = question;
-        const solvedQuestion = solveCountForUserMap[questionId] || {solveCount: 0, lastUpdatedAt: '    Unsolved'};
+        const solvedQuestion = solveCountForUserMap[questionId] || { solveCount: 0, lastUpdatedAt: '    Unsolved' };
 
         questionsWithSolveCount.push({
             _id: question._id,
