@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable no-unused-vars */
 import React from 'react';
 
 import { useCookies } from 'react-cookie';
@@ -23,7 +26,7 @@ function Navbar() {
   const [cookies, setCookie, removeCookie] = useCookies(['userId', 'name']);
 
   // Get states using useSelector ( state->reducerName )
-  const userAuthState = useSelector((state) => state.auth);
+  // const userAuthState = useSelector((state) => state.auth);
 
   // Fire actions using dispatch -> fires action -> Watcher saga handles rest
   const dispatch = useDispatch();
@@ -71,12 +74,13 @@ function Navbar() {
           >
             <NavLink to="/">
               <img
+                alt=".."
                 src={logo}
                 style={{
-                  width: '100%',
-                  height: 'auto',
                   cursor: 'pointer',
+                  height: 'auto',
                   overflow: 'hidden',
+                  width: '100%',
                 }}
                 onClick={() => console.log('clicked on logo!')}
               />

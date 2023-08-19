@@ -1,10 +1,18 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable react/prop-types */
+import React from 'react';
+
 import { useWindowSize } from '@uidotdev/usehooks';
-import React from 'react'
 
-const DifficultyBadge = (props) => {
-  const { text } = props;
+function DifficultyBadge(props) {
+  const {
+    text,
+  } = props;
 
-  const { width, height } = useWindowSize();
+  const {
+    // eslint-disable-next-line no-unused-vars
+    width, height,
+  } = useWindowSize();
   const isMobile = width < 768;
 
   if (isMobile) {
@@ -14,15 +22,17 @@ const DifficultyBadge = (props) => {
   return (
     <span style={
       {
+        background: text === 'Easy' ? 'lightseagreen' : text === 'Medium' ? '#d5adcf' : 'indianred',
+        borderRadius: '4px',
+        color: 'white',
         marginLeft: '0.8rem',
         padding: '0.15rem 0.4rem',
-        background: text === 'Easy' ? 'lightseagreen' : text === 'Medium' ? '#d5adcf' : 'indianred',
-        borderRadius: '4px', color: 'white',
       }
-    }>
+    }
+    >
       {text}
     </span>
-  )
+  );
 }
 
-export default DifficultyBadge
+export default DifficultyBadge;
