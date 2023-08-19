@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 import CodeSection from './CodeSection';
@@ -6,8 +7,8 @@ import Tab from './Tab';
 function All(props) {
   const {
     allQuestions,
-    userId,
     tabCookie,
+    userId,
   } = props;
 
   return (

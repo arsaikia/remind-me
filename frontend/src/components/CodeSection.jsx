@@ -1,64 +1,61 @@
 /* eslint-disable react/prop-types */
 
-import React, { useState, useEffect } from 'react';
+import React, {
+  useState, useEffect,
+} from 'react';
+
+import {
+  CopyBlock, dracula,
+} from 'react-code-blocks';
+import Modal from 'react-modal';
 import {
   useDispatch,
   useSelector,
 } from 'react-redux';
-import Modal from 'react-modal';
-import {
-  CopyBlock, dracula,
-} from 'react-code-blocks';
 
-import {closeCodeModal, launchCodeModal} from '../actions/actions'
-
-import FullScreenModal from './FullScreenModal/FullScreenModal';
 import Loader from './Loader/Loader';
-
+import { closeCodeModal } from '../actions/actions';
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root');
 
 const customStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
     bottom: 'auto',
+    left: '50%',
     marginRight: '-50%',
+    right: 'auto',
+    top: '50%',
     transform: 'translate(-50%, -50%)',
   },
 };
 
-
-function CodeSection(props) {
-
+function CodeSection() {
   const [codeText, setCodeText] = useState('');
 
   // Get states using useSelector ( state->reducerName )
   const codeState = useSelector((state) => state.codeModal);
-  const { showLoading, showCodeModal, selectedQuestionId, codes } = codeState;
-
+  const {
+    showLoading, showCodeModal, selectedQuestionId, codes,
+  } = codeState;
 
   useEffect(() => {
     if (!selectedQuestionId) return;
 
-    const codeToShow = codes.filter((code, idx) => {
-      return code.questionId === selectedQuestionId
-    })
+    // eslint-disable-next-line no-unused-vars
+    const codeToShow = codes.filter((code, idx) => code.questionId === selectedQuestionId);
     console.log(codeToShow);
     if (codeToShow.length) {
       setCodeText(codeToShow[0].code);
     }
 
+    // eslint-disable-next-line consistent-return
     return () => {
       setCodeText('');
-    }
-  }, [codes, selectedQuestionId])
-  
+    };
+  }, [codes, selectedQuestionId]);
 
   console.log(codeText, showLoading);
-
 
   // Fire actions using dispatch -> fires action -> Watcher saga handles rest
   const dispatch = useDispatch();
@@ -68,7 +65,6 @@ function CodeSection(props) {
     language,
     lineNumbers,
     text,
-    wrapLines,
   } = {
     language: 'python',
     lineNumbers: true,
@@ -90,7 +86,8 @@ function CodeSection(props) {
     >
       {showLoading && <Loader show />}
       {
-        !showLoading && text &&
+        !showLoading && text
+        && (
         <CopyBlock
           language={language}
           text={text}
@@ -99,6 +96,7 @@ function CodeSection(props) {
           wrapLines
           codeBlock
         />
+        )
       }
     </Modal>
   );

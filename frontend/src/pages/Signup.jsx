@@ -1,6 +1,5 @@
-import React, {
-  useEffect, useState,
-} from 'react';
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { useEffect } from 'react';
 
 import {
   Formik, Form, Field, ErrorMessage,
@@ -48,7 +47,14 @@ function Signup() {
      ******************************************************************** */
   return (
     <CenteredFlex minHeight="90vh">
-      <Container direction="column" minWidth="20vw" minHeight="40vh" padding="20px 20px" background="#f9f9f9" boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px">
+      <Container
+        direction="column"
+        minWidth="20vw"
+        minHeight="40vh"
+        padding="20px 20px"
+        background="#f9f9f9"
+        boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px"
+      >
         <h1 style={{
           textAlign: 'center',
         }}
@@ -58,9 +64,9 @@ function Signup() {
 
         <Formik
           initialValues={{
+            email: '',
             firstName: '',
             lastName: '',
-            email: '',
             password: '',
           }}
           validate={(values) => {
@@ -81,13 +87,13 @@ function Signup() {
               errors.password = (
                 <span>
                   Password requirements:
-                            <ul>
-                              <li>At-least 1uppercase</li>
-                              <li>1 lowercase</li>
-                              <li>1 digit</li>
-                              <li>1 special character</li>
-                              <li>minimum 8 characters</li>
-                            </ul>
+                  <ul>
+                    <li>At-least 1uppercase</li>
+                    <li>1 lowercase</li>
+                    <li>1 digit</li>
+                    <li>1 special character</li>
+                    <li>minimum 8 characters</li>
+                  </ul>
                 </span>
               );
             }
@@ -105,67 +111,67 @@ function Signup() {
           }) => (
             <Form>
               <CenteredFlex direction="column" minWidth="20vw">
-                  {/* Error containers below */}
-                  <CenteredFlex direction="column" background="rgba(238,221,235,0.4)" width="100%">
-                      <ErrorMessage className="error" name="email" component="div" />
-                      <ErrorMessage className="error" name="firstName" component="div" />
-                      <ErrorMessage className="error" name="lastName" component="div" />
-                      <ErrorMessage className="error" name="password" component="div" />
-                    </CenteredFlex>
-                  <Container padding="0.4rem 0" width="100%">
-                      <label style={{
-                          width: '100%',
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                        }}
-                        >
-                                      First Name:
-                          {' '}
-                          <Field type="text" name="firstName" />
-                        </label>
-                    </Container>
-                  <Container padding="0.4rem 0" width="100%">
-                      <label style={{
-                          width: '100%',
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                        }}
-                        >
-                                      Last Name:
-                          {' '}
-                          <Field type="text" name="lastName" />
-                        </label>
-                    </Container>
-                  <Flex padding="0.4rem 0" width="100%" background="" justifyContent="space-between">
-                      <label style={{
-                          width: '100%',
-                          display: 'flex',
-                          flexDirection: 'row',
-                          justifyContent: 'space-between',
-                        }}
-                        >
-                                          Email:
-                          <Field type="email" name="email" />
-                        </label>
-                    </Flex>
-                  <Container padding="0.4rem 0" width="100%">
-                      <label style={{
-                          width: '100%',
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                        }}
-                        >
-                                      Password:
-                          {' '}
-                          <Field type="password" name="password" />
-                        </label>
-                    </Container>
-                  <CenteredFlex padding="0.4rem 0" width="100%">
-                      <button className="button-4" type="submit" disabled={isSubmitting}>
-                          Submit
-                                    </button>
-                    </CenteredFlex>
+                {/* Error containers below */}
+                <CenteredFlex direction="column" background="rgba(238,221,235,0.4)" width="100%">
+                  <ErrorMessage className="error" name="email" component="div" />
+                  <ErrorMessage className="error" name="firstName" component="div" />
+                  <ErrorMessage className="error" name="lastName" component="div" />
+                  <ErrorMessage className="error" name="password" component="div" />
                 </CenteredFlex>
+                <Container padding="0.4rem 0" width="100%">
+                  <label style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                  }}
+                  >
+                    First Name:
+                    {' '}
+                    <Field type="text" name="firstName" />
+                  </label>
+                </Container>
+                <Container padding="0.4rem 0" width="100%">
+                  <label style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                  }}
+                  >
+                    Last Name:
+                    {' '}
+                    <Field type="text" name="lastName" />
+                  </label>
+                </Container>
+                <Flex padding="0.4rem 0" width="100%" background="" justifyContent="space-between">
+                  <label style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                  }}
+                  >
+                    Email:
+                    <Field type="email" name="email" />
+                  </label>
+                </Flex>
+                <Container padding="0.4rem 0" width="100%">
+                  <label style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                  }}
+                  >
+                    Password:
+                    {' '}
+                    <Field type="password" name="password" />
+                  </label>
+                </Container>
+                <CenteredFlex padding="0.4rem 0" width="100%">
+                  <button className="button-4" type="submit" disabled={isSubmitting}>
+                    Submit
+                  </button>
+                </CenteredFlex>
+              </CenteredFlex>
             </Form>
           )}
         </Formik>
