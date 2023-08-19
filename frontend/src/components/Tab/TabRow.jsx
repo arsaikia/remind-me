@@ -1,14 +1,24 @@
-import React from 'react'
-import DifficultyDot from './DifficultyDot';
-import DifficultyBadge from './DifficultyBadge';
-import { CenteredFlex, Flex, UnstyledLink } from '../../styles';
+/* eslint-disable react/prop-types */
+import React from 'react';
+
 import { useWindowSize } from '@uidotdev/usehooks';
+import {
+  useDispatch, useSelector,
+} from 'react-redux';
 import { Tooltip } from 'react-tooltip';
 
-const TabRow = (props) => {
+import DifficultyDot from './DifficultyDot';
+import { launchCodeModal } from '../../actions/actions';
+import {
+  Flex,
+  UnstyledLink,
+} from '../../styles';
+
+function TabRow(props) {
   const {
-    _id,
+    _id: id,
     difficulty,
+    group,
     isRecap,
     lastUpdatedAt,
     link,
@@ -17,45 +27,115 @@ const TabRow = (props) => {
     solveCount,
   } = props;
 
-  const { width } = useWindowSize();
+  const {
+    width,
+  } = useWindowSize();
   const isMobile = width < 768;
 
-  return (
-    <>
-      <tr key={_id}>
-        <td style={{ textAlign: 'left' }}>
-          <Flex alignItems="center">
-            <DifficultyDot text={difficulty} id={_id} />
-            <UnstyledLink
-              href={`https://leetcode.com/problems/${link}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-tooltip-id={link}
-            >
-              {name}
-            </UnstyledLink>
-          </Flex>
-          {/* Go to leetcode tooltip */}
-          <Tooltip
-            id={link}
-            className='tooltip-z-idx'
-            place="top"
-            // variant={ }
-            content={" ⭐ Go to leetcode ⭐ "}
-          />
+  // Get states using useSelector ( state->reducerName )
+  const codeState = useSelector((state) => state.codeModal);
 
-          {/* <DifficultyBadge text={difficulty} /> */}
-        </td>
-        {!isMobile && <td>{solveCount}</td>}
-        {!isMobile && <td>{lastUpdatedAt}</td>}
-        <td >
-          {solveCount === 0 && <button className="button-41" type="submit" onClick={() => markAsDoneHandler(_id)}>Done</button>}
-          {(solveCount > 0 && isRecap) && <button className="button-41" type="submit" onClick={() => markAsDoneHandler(_id)}>Done</button>}
-          {(solveCount > 0 && !isRecap) && <span>{solveCount > 5 ? '🔥🔥🔥' : solveCount > 3 ? '🔥🔥' : '🔥'}</span>}
-        </td>
-      </tr>
-    </>
-  )
+  // Fire actions using dispatch -> fires action -> Watcher saga handles rest
+  const dispatch = useDispatch();
+
+  const codeButtonHandler = () => {
+    // Check if question code is already in redux store
+    const {
+      codes,
+    } = codeState;
+    let codeInRedux = false;
+    // eslint-disable-next-line no-plusplus
+    for (let idx = 0; idx < codes.length; idx++) {
+      const element = codes[idx];
+      if (element.questionId === id) {
+        codeInRedux = true;
+        console.log(codeInRedux);
+        break;
+      }
+    }
+    if (!codeInRedux) {
+      dispatch(launchCodeModal({
+        fetchCode: true,
+        group,
+        id,
+        link,
+      }));
+    } else {
+      dispatch(launchCodeModal({
+        fetchCode: false,
+        group,
+        id,
+        link,
+      }));
+    }
+  };
+
+  return (
+    <tr key={id}>
+      <td style={{
+        textAlign: 'left',
+      }}
+      >
+        <Flex alignItems="center">
+          <DifficultyDot text={difficulty} id={id} />
+          <UnstyledLink
+            href={`https://leetcode.com/problems/${link}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-tooltip-id={link}
+          >
+            {name}
+          </UnstyledLink>
+        </Flex>
+        {/* Go to leetcode tooltip */}
+        <Tooltip
+          id={link}
+          className="tooltip-z-idx"
+          place="top"
+            // variant={ }
+          content=" ⭐ Go to leetcode ⭐ "
+        />
+
+        {/* <DifficultyBadge text={difficulty} /> */}
+      </td>
+      {!isMobile && (
+      <td>
+        <button type="button" className="button-30" onClick={codeButtonHandler}>{'</>'}</button>
+      </td>
+      )}
+
+      {!isMobile
+         && (
+         <td>
+           <button type="button" className="button-30">📄</button>
+         </td>
+         )}
+      <td>
+        {(solveCount === 0)
+          && <button className="button-41" type="submit" onClick={() => markAsDoneHandler(id)}>Done</button>}
+        {(solveCount > 0 && isRecap)
+          && <button className="button-41" type="submit" onClick={() => markAsDoneHandler(id)}>Done</button>}
+        {(solveCount > 0 && !isRecap) && (
+        <span
+          style={{
+            cursor: 'default',
+          }}
+          data-tooltip-id={lastUpdatedAt}
+        >
+          {`🔥 x ${solveCount}`}
+        </span>
+        )}
+        {/* Last Updated at tooltip */}
+        <Tooltip
+          id={lastUpdatedAt}
+          className="tooltip-z-idx"
+          place="top"
+            // variant={ }
+          content={lastUpdatedAt}
+        />
+      </td>
+    </tr>
+  );
 }
 
-export default TabRow
+export default TabRow;

@@ -1,42 +1,28 @@
 import React from 'react';
-import { CopyBlock, dracula } from "react-code-blocks";
 
+import CodeSection from '../components/CodeSection';
 
-const Playground = () => {
-
+function Playground() {
   const codeText = `class Solution:
-    def lastStoneWeightII(self, stones: List[int]) -> int:
-        # Memoization
-        stoneSum = sum(stones)
-        target = ceil(stoneSum / 2)
+      # O(N) Time | O(N) Space
+      def isAnagram(self, s: str, t: str) -> bool:
+          if len(s) != len(t):
+              return False
+          sCount = [0 for __ in range(26)]
+          tCount = [0 for __ in range(26)]
 
-        def dfs(i, total):
-            if total >= target or i == len(stones):
-                return abs(total - (stoneSum - total))
-            if (i, total) in dp:
-                return dp[(i, total)]
+          for char in s:
+              idx = ord(str(char)) - ord("a")
+              sCount[idx] += 1
 
-            dp[(i, total)] = min(dfs(i + 1, total),
-                                 dfs(i + 1, total + stones[i]))
-            return dp[(i, total)]
+          for char in t:
+              idx = ord(str(char)) - ord("a")
+              tCount[idx] += 1
 
-        dp = {}
-        return dfs(0, 0)
-`;
+          return sCount == tCount
+  `;
 
-  const { language, text, lineNumbers, wrapLines } = { language: 'python', text: codeText, lineNumbers: true, wrapLines: true};
-  return (
-    <div>
-      <CopyBlock
-          language={language}
-          text={text}
-          showLineNumbers={lineNumbers}
-          theme={dracula}
-          wrapLines={true}
-          codeBlock
-        />
-    </div>
-  )
+  return <CodeSection codeText={codeText} />;
 }
 
-export default Playground
+export default Playground;

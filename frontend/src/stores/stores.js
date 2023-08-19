@@ -4,6 +4,7 @@ import rootSaga from "../sagas";
 import themeReducer from '../reducers/themeReducer';
 import questionReducer from '../reducers/questionsReducer';
 import authReducer from '../reducers/authReducer';
+import codeModalReducer from '../reducers/codeReducer';
 
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware()
@@ -13,6 +14,7 @@ const store = configureStore({
         auth: authReducer,
         theme: themeReducer,
         questions: questionReducer,
+        codeModal: codeModalReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 });
