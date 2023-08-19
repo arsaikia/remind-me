@@ -1,12 +1,20 @@
-import React from 'react'
+import React from 'react';
+
+import CodeSection from './CodeSection';
 import Tab from './Tab';
 
 function All(props) {
-  const { allQuestions, userId, tabCookie } = props;
+  const {
+    allQuestions,
+    userId,
+    tabCookie,
+  } = props;
+
   return (
     <div>
       <h2>Questions</h2>
       <div>
+        <CodeSection />
         {
           allQuestions.groups.map((group) => (
             <Tab

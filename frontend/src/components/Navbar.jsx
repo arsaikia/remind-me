@@ -1,20 +1,29 @@
-import React from 'react'
-import { Container, Flex, CenteredFlex, StyledNavLink, BlankButton } from '../styles'
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import logo from '../logo.png'
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+
 import { useCookies } from 'react-cookie';
-import { getQuestions, resetAuthState } from '../actions/actions';
+import {
+  useSelector, useDispatch,
+} from 'react-redux';
+import {
+  NavLink, useLocation, useNavigate,
+} from 'react-router-dom';
 
+import {
+  getQuestions, resetAuthState,
+} from '../actions/actions';
+import logo from '../logo.png';
+import {
+  Container, Flex, CenteredFlex, StyledNavLink, BlankButton,
+} from '../styles';
 
-const Navbar = () => {
+function Navbar() {
   const loc = useLocation();
   const navigate = useNavigate();
 
   const [cookies, setCookie, removeCookie] = useCookies(['userId', 'name']);
 
   // Get states using useSelector ( state->reducerName )
-  const userAuthState = useSelector(state => state.auth);
+  const userAuthState = useSelector((state) => state.auth);
 
   // Fire actions using dispatch -> fires action -> Watcher saga handles rest
   const dispatch = useDispatch();
@@ -22,44 +31,55 @@ const Navbar = () => {
   const resetAuth = () => dispatch(resetAuthState());
 
   const userIdInCookie = cookies.userId;
-  const name = cookies.name;
+  const {
+    name,
+  } = cookies;
   const isUserAuthenticated = userIdInCookie;
 
-  /******************************************************************************
+  /** ****************************************************************************
    * HANDLER FUNCTIONS
-  ******************************************************************************/
+  ***************************************************************************** */
   const signOutHandler = () => {
     removeCookie('userId');
     removeCookie('name');
     resetAuth();
     fetchAllQuestions('guest');
     navigate('/');
-  }
+  };
 
   return (
     <>
       <CenteredFlex
         width="100%"
         height="8%"
-        border={'1px solid #dee7f9'}
-        background={'linear-gradient(180deg, rgba(254,254,254,1) 35%, rgba(225,225,225,1) 100%)'}
-        position={"fixed"}
+        border="1px solid #dee7f9"
+        background="linear-gradient(180deg, rgba(254,254,254,1) 35%, rgba(225,225,225,1) 100%)"
+        position="fixed"
         zindex={1000}
-        top={'0'}
+        top="0"
       >
         <CenteredFlex
           justifyContent="space-between"
-          width={"90%"}
+          width="90%"
           height="100%"
         >
           {/* LOGO */}
           <Container
             maxWidth="min-content"
             minWidth="75px"
-            overflow='hidden'
+            overflow="hidden"
           >
             <NavLink to="/">
-              <img src={logo} style={{ width: '100%', height: 'auto', cursor: 'pointer', overflow: 'hidden' }} onClick={() => console.log("clicked on logo!")} />
+              <img
+                src={logo}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  cursor: 'pointer',
+                  overflow: 'hidden',
+                }}
+                onClick={() => console.log('clicked on logo!')}
+              />
             </NavLink>
           </Container>
 
@@ -71,23 +91,32 @@ const Navbar = () => {
           >
             {/* Keeping only route here as lone route at middle of nav looks off */}
             {
-              isUserAuthenticated && loc.pathname !== "/todo" && (
+              isUserAuthenticated && loc.pathname !== '/todo' && (
                 <StyledNavLink className="bold" padding="0 0.8rem" to="/todo">
                   <p>Todo</p>
                 </StyledNavLink>
               )
             }
 
-            {isUserAuthenticated && <p className="bold" style={{ padding: "0 0.8rem" }}>
+            {isUserAuthenticated && (
+            <p
+              className="bold"
+              style={{
+                padding: '0 0.8rem',
+              }}
+            >
               {`Hi, ${name}`}
-            </p>}
+            </p>
+            )}
 
-            {isUserAuthenticated && <BlankButton onClick={signOutHandler}>
+            {isUserAuthenticated && (
+            <BlankButton onClick={signOutHandler}>
               <span className="bold"> Sign Out</span>
-            </BlankButton>}
+            </BlankButton>
+            )}
 
             {
-              !isUserAuthenticated && loc.pathname !== "/login" && (
+              !isUserAuthenticated && loc.pathname !== '/login' && (
                 <StyledNavLink className="bold" padding="0 0.8rem" to="/login">
                   <p>Login</p>
                 </StyledNavLink>
@@ -95,7 +124,7 @@ const Navbar = () => {
             }
 
             {
-              !isUserAuthenticated && loc.pathname !== "/signup" && (
+              !isUserAuthenticated && loc.pathname !== '/signup' && (
                 <StyledNavLink className="bold" padding="0 0.8rem" to="/signup">
                   <p>Signup</p>
                 </StyledNavLink>
@@ -112,7 +141,7 @@ const Navbar = () => {
       />
       {/* Reserved space taken by the absolute Navbar */}
     </>
-  )
+  );
 }
 
 export default Navbar;

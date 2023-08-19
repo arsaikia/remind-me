@@ -1,14 +1,19 @@
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { useCookies } from "react-cookie";
-import { BrowserRouter as Router } from "react-router-dom";
-import { getQuestions } from "./actions/actions";
-import { Container } from "./styles";
-import Navbar from "./components/Navbar";
-import AllRoutes from "./AllRoutes";
+import React, { useEffect } from 'react';
+
+import { useCookies } from 'react-cookie';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+import { getQuestions } from './actions/actions';
+import AllRoutes from './AllRoutes';
+import Navbar from './components/Navbar';
+import { Container } from './styles';
 
 function App() {
-  const [cookies, setCookie, removeCookie] = useCookies(["userId", "openTab", "name"]);
+  const [cookies, setCookie] = useCookies(['userId', 'openTab', 'name']);
 
   // Get states using useSelector ( state->reducerName )
   const allQuestions = useSelector((state) => state.questions.allQuestions);
@@ -25,7 +30,7 @@ function App() {
 
   // Fire actions using dispatch -> fires action -> Watcher saga handles rest
   const dispatch = useDispatch();
-  const fetchAllQuestions = (userId) => dispatch(getQuestions(userId));
+  const fetchAllQuestions = (userIdToFetchQuestions) => dispatch(getQuestions(userIdToFetchQuestions));
 
   // Load all question when the app first loads/ user signs in
   useEffect(() => {
@@ -37,21 +42,32 @@ function App() {
     if (!isAuthenticated) {
       return;
     }
-    setCookie("userId", userId, { path: "/" });
-    setCookie("name", userNameIdInAuthStore, { path: "/" });
+    setCookie('userId', userId, {
+      path: '/',
+    });
+    setCookie('name', userNameIdInAuthStore, {
+      path: '/',
+    });
   }, [isAuthenticated]);
 
-  /**************************************************************
+  /** **************************************************************
    * Handler Functions
-  ***************************************************************/
+  **************************************************************** */
+  const allQuestionsProps = {
+    allQuestions,
+    tabCookie,
+    userId,
+  };
+  const todoProps = {
+    isOpen: true,
+    isRecap: true,
+    todoQuestions,
+    userId,
+  };
 
-  const allQuestionsProps = { allQuestions, userId, tabCookie };
-  const todoProps = { todoQuestions, isOpen: true, isRecap: true, userId };
-
-  /***************************************************************
+  /** ***************************************************************
    * Returns JSX from here
-  ****************************************************************/
-
+  ***************************************************************** */
   return (
     <Router>
       <Navbar />
