@@ -24,9 +24,14 @@ const customStyles = {
     bottom: 'auto',
     left: '50%',
     marginRight: '-50%',
+    maxHeight: '80vh',
     right: 'auto',
-    top: '50%',
+    top: '55%',
     transform: 'translate(-50%, -50%)',
+  },
+  overlay: {
+    backgroundColor: 'rgba(204,214,246,0.6)',
+
   },
 };
 
