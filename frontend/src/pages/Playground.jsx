@@ -1,28 +1,22 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable max-len */
 import React from 'react';
 
-import CodeSection from '../components/CodeSection';
+import 'react-tabs/style/react-tabs.css';
+import TabbedSelection from '../components/TabbedSelection/TabbedSelection';
 
 function Playground() {
-  const codeText = `class Solution:
-      # O(N) Time | O(N) Space
-      def isAnagram(self, s: str, t: str) -> bool:
-          if len(s) != len(t):
-              return False
-          sCount = [0 for __ in range(26)]
-          tCount = [0 for __ in range(26)]
-
-          for char in s:
-              idx = ord(str(char)) - ord("a")
-              sCount[idx] += 1
-
-          for char in t:
-              idx = ord(str(char)) - ord("a")
-              tCount[idx] += 1
-
-          return sCount == tCount
-  `;
-
-  return <CodeSection codeText={codeText} />;
+  return (
+    <TabbedSelection
+      allQuestionsContent={(
+        <div>
+          <p>lorem</p>
+          <img src="" href="" alt="sds" />
+        </div>
+)}
+      topQuestionsContent="lorem lorem 2"
+    />
+  );
 }
 
 export default Playground;

@@ -13,6 +13,7 @@ import {
   Flex,
   UnstyledLink,
 } from '../../styles';
+import GreenCheck from '../GreenCheck/GreenCheck';
 
 function TabRow(props) {
   const {
@@ -111,10 +112,23 @@ function TabRow(props) {
          </td>
          )}
       <td>
-        {(solveCount === 0)
+        {/* Unsolved Questions */}
+        {/* On Desktop */}
+        {(!isMobile && solveCount === 0)
           && <button className="button-41" type="submit" onClick={() => markAsDoneHandler(id)}>Done</button>}
-        {(solveCount > 0 && isRecap)
+        {/* On Mobile */}
+        {(isMobile && solveCount === 0)
+          && <GreenCheck onClick={() => markAsDoneHandler(id)} />}
+
+        {/* Solved - TODO tab */}
+        {/* On Desktop */}
+        {(!isMobile && solveCount > 0 && isRecap)
           && <button className="button-41" type="submit" onClick={() => markAsDoneHandler(id)}>Done</button>}
+        {/* On Mobile */}
+        {(isMobile && solveCount > 0 && isRecap)
+          && <GreenCheck onClick={() => markAsDoneHandler(id)} />}
+
+        {/* Solved - All questions. Top 150 tab */}
         {(solveCount > 0 && !isRecap) && (
         <span
           style={{

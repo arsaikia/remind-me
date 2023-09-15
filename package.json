@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "set NODE_ENV=development&& nodemon --experimental-json-modules backend/server",
-    "client": "npm start --prefix frontend",
+    "client": "npm start --prefix frontend --max_old_space_size=4096 build",
     "start": "node  ./backend/server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "install-server": "npm install",

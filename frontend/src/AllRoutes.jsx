@@ -23,7 +23,7 @@ function AllRoutes(props) {
 
   return (
     <Routes>
-      <Route path="/" element={<All {...allQuestionsProps} />} />
+      <Route path="/" element={<All allQuestionsProps={allQuestionsProps} />} />
       <Route path="/todo" element={<Todo {...todoProps} />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />

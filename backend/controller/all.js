@@ -35,6 +35,7 @@ const getQuestions = asyncHandler(async (req, res, next) => {
             name: question.name,
             link: question.link,
             group: question.group,
+            list: question.list,
             difficulty: question.difficulty,
             solveCount: solvedQuestion.solveCount,
             lastUpdatedAt: solvedQuestion.lastUpdatedAt.toString().slice(4, 15),
