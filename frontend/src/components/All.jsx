@@ -2,21 +2,31 @@
 import React from 'react';
 
 import CodeSection from './CodeSection';
-import Tab from './Tab';
+// import Tab from './Tab';
+import TabbedSelection from './TabbedSelection/TabbedSelection';
 
 function All(props) {
   const {
-    allQuestions,
-    tabCookie,
-    userId,
+    allQuestionsProps: {
+      // allQuestions,
+      tabCookie,
+      userId,
+    },
   } = props;
 
   return (
     <div>
-      <h2>Questions</h2>
       <div>
         <CodeSection />
-        {
+
+        <TabbedSelection
+          allQuestionsProps={{
+            tabCookie,
+            userId,
+          }}
+        />
+
+        {/* {
           allQuestions.groups.map((group) => (
             <Tab
               key={group}
@@ -27,7 +37,7 @@ function All(props) {
               tabCookie={tabCookie}
             />
           ))
-        }
+        } */}
       </div>
     </div>
   );

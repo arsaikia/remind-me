@@ -16,7 +16,11 @@ function App() {
   const [cookies, setCookie] = useCookies(['userId', 'openTab', 'name']);
 
   // Get states using useSelector ( state->reducerName )
-  const allQuestions = useSelector((state) => state.questions.allQuestions);
+  // const allQuestions = useSelector((state) => state.questions.allQuestions);
+
+  // Get states using useSelector ( state->reducerName )
+  // const topQuestions = useSelector((state) => state.questions.topQuestions);
+
   // const solvedQuestions = useSelector((state) => state.questions.solvedQuestions);
   const todoQuestions = useSelector((state) => state.questions.todoQuestions);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -54,10 +58,10 @@ function App() {
    * Handler Functions
   **************************************************************** */
   const allQuestionsProps = {
-    allQuestions,
     tabCookie,
     userId,
   };
+
   const todoProps = {
     isOpen: true,
     isRecap: true,
@@ -65,9 +69,9 @@ function App() {
     userId,
   };
 
-  /** ***************************************************************
+  /** ****************************************************************
    * Returns JSX from here
-  ***************************************************************** */
+  ****************************************************************** */
   return (
     <Router>
       <Navbar />
