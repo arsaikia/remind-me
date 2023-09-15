@@ -3,6 +3,7 @@ import {
   GET_ALL_QUESTIONS,
   GET_SOLVED_QUESTIONS,
   GET_TODAY_QUESTIONS,
+  GET_TOP_QUESTIONS,
 } from '../actions/types';
 
 const initialState = {
@@ -12,6 +13,10 @@ const initialState = {
   },
   solvedQuestions: [],
   todoQuestions: [],
+  topQuestions: {
+    groups: [],
+    questions: {},
+  },
 };
 
 const questionReducer = (state = initialState, action) => {
@@ -20,6 +25,12 @@ const questionReducer = (state = initialState, action) => {
       return {
         ...state,
         allQuestions: action.payload,
+      };
+
+    case GET_TOP_QUESTIONS:
+      return {
+        ...state,
+        topQuestions: action.payload,
       };
 
     case GET_SOLVED_QUESTIONS:

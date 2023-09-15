@@ -28,6 +28,15 @@ const questionSchema = new mongoose.Schema({
         required: false,
         trim: true,
     },
+    list: {
+        type: [String],
+        enum: ['TOP 150', 'ALL'],
+        default: 'ALL',
+    },
+    order: {
+        type: Number,
+        default: 0,
+    }
 });
 
 const Question = mongoose.model('Question', questionSchema);

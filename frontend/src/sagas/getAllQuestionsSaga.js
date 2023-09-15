@@ -5,10 +5,11 @@ import {
 } from 'redux-saga/effects';
 
 import {
-  GET_QUESTIONS,
   GET_ALL_QUESTIONS,
+  GET_QUESTIONS,
   GET_SOLVED_QUESTIONS,
   GET_TODAY_QUESTIONS,
+  GET_TOP_QUESTIONS,
 } from '../actions/types';
 import { getQuestions } from '../api/getQuestions';
 import groupBy from '../utils/groupBy';
@@ -29,6 +30,20 @@ function* fetchAllQuestions(action) {
   yield put({
     payload: questionWithGroups,
     type: GET_ALL_QUESTIONS,
+  });
+
+  // fire action -> reducer to get top 150 questions
+  const topQuestions = allQuestions.filter((question) => question.list.includes('TOP 150'));
+  const topGroupedQuestions = groupBy(topQuestions, (question) => question.group);
+  const topQuestionsGroupNames = Array.from(topGroupedQuestions.keys());
+  const topQuestionWithGroups = {
+    groups: topQuestionsGroupNames,
+    questions: Object.fromEntries(groupedQuestions),
+  };
+  console.log('getTopQuestions', topQuestionWithGroups);
+  yield put({
+    payload: topQuestionWithGroups,
+    type: GET_TOP_QUESTIONS,
   });
 
   // fire action -> reducer to get only solved questions
