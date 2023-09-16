@@ -5,8 +5,6 @@ import Tab from './Tab';
 
 function Todo(props) {
   const {
-    // isOpen,
-    // isRecap,
     todoQuestions,
     userId,
   } = props;
