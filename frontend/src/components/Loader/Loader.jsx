@@ -1,23 +1,13 @@
 import React from 'react';
+
 import './styles.css';
+import GridLoader from './GridLoader';
 
 function Loader(show) {
   if (!show) {
     return null;
   }
-  return (
-    <div className="lds-grid">
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-    </div>
-  );
+  return <GridLoader />;
 }
 
 export default Loader;

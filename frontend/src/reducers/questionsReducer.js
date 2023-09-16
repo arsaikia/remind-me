@@ -4,6 +4,8 @@ import {
   GET_SOLVED_QUESTIONS,
   GET_TODAY_QUESTIONS,
   GET_TOP_QUESTIONS,
+  HIDE_FETCH_LOADING,
+  SHOW_FETCH_LOADING,
 } from '../actions/types';
 
 const initialState = {
@@ -11,6 +13,7 @@ const initialState = {
     groups: [],
     questions: {},
   },
+  isFetchingQuestions: true,
   solvedQuestions: [],
   todoQuestions: [],
   topQuestions: {
@@ -21,6 +24,18 @@ const initialState = {
 
 const questionReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SHOW_FETCH_LOADING:
+      return {
+        ...state,
+        isFetchingQuestions: true,
+      };
+
+    case HIDE_FETCH_LOADING:
+      return {
+        ...state,
+        isFetchingQuestions: false,
+      };
+
     case GET_ALL_QUESTIONS:
       return {
         ...state,

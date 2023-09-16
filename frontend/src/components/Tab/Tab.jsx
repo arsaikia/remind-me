@@ -12,15 +12,11 @@ import { useCookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-// import DifficultyBadge from './DifficultyBadge';
-// import DifficultyDot from './DifficultyDot';
 import TabRow from './TabRow';
 import { markQuestionAsDone } from '../../actions/actions';
-// import { UnstyledLink } from '../../styles';
 
 function Tab(props) {
   const {
-    // height,
     width,
   } = useWindowSize();
   const isMobile = width < 768;
@@ -98,7 +94,6 @@ function Tab(props) {
             data.map((question) => {
               const tabRowProps = {
                 ...question,
-                group,
                 isRecap,
                 markAsDoneHandler,
               };
