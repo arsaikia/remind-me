@@ -77,10 +77,6 @@ function CodeSection() {
     wrapLines: true,
   };
 
-  // if (!showCodeModal) {
-  //   return null;
-  // }
-
   return (
     <Modal
       isOpen={showCodeModal}

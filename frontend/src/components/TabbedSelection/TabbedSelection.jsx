@@ -11,7 +11,7 @@ import {
   Tab,
 } from 'react-tabs';
 
-import XTab from '../Tab/index';
+import GroupedQuestionSection from '../Tab/index';
 
 import 'react-tabs/style/react-tabs.css';
 
@@ -49,9 +49,9 @@ function TabbedSelection(props) {
       <TabPanel>
         {
         topQuestions.groups.map((group) => (
-          <XTab
+          <GroupedQuestionSection
             key={group}
-            data={allQuestions.questions[group]}
+            data={topQuestions.questions[group]}
             group={group}
             userId={userId}
             isOpen={tabCookie === group}
@@ -64,7 +64,7 @@ function TabbedSelection(props) {
       <TabPanel>
         {
         allQuestions?.groups.map((group) => (
-          <XTab
+          <GroupedQuestionSection
             key={group}
             data={allQuestions.questions[group]}
             group={group}

@@ -9,6 +9,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import { getQuestions } from './actions/actions';
 import AllRoutes from './AllRoutes';
+import CodeSection from './components/CodeSection';
+import FullScreenLoader from './components/Loader/FullScreenLoader';
 import Navbar from './components/Navbar';
 import { Container } from './styles';
 
@@ -16,12 +18,7 @@ function App() {
   const [cookies, setCookie] = useCookies(['userId', 'openTab', 'name']);
 
   // Get states using useSelector ( state->reducerName )
-  // const allQuestions = useSelector((state) => state.questions.allQuestions);
-
-  // Get states using useSelector ( state->reducerName )
-  // const topQuestions = useSelector((state) => state.questions.topQuestions);
-
-  // const solvedQuestions = useSelector((state) => state.questions.solvedQuestions);
+  const isFetchingQuestions = useSelector((state) => state.questions.isFetchingQuestions);
   const todoQuestions = useSelector((state) => state.questions.todoQuestions);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const userIdInAuthStore = useSelector((state) => state.auth.userId);
@@ -72,10 +69,14 @@ function App() {
   /** ****************************************************************
    * Returns JSX from here
   ****************************************************************** */
+  if (isFetchingQuestions) {
+    return <FullScreenLoader show />;
+  }
   return (
     <Router>
       <Navbar />
       <Container width="90%" padding="0 5%">
+        <CodeSection />
         <AllRoutes
           allQuestionsProps={allQuestionsProps}
           todoProps={todoProps}

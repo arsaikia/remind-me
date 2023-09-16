@@ -10,6 +10,8 @@ import {
   GET_SOLVED_QUESTIONS,
   GET_TODAY_QUESTIONS,
   GET_TOP_QUESTIONS,
+  HIDE_FETCH_LOADING,
+  SHOW_FETCH_LOADING,
 } from '../actions/types';
 import { getQuestions } from '../api/getQuestions';
 import groupBy from '../utils/groupBy';
@@ -17,6 +19,11 @@ import { getQuestionsToReviseToday } from '../utils/revisionHelper';
 
 // worker Saga
 function* fetchAllQuestions(action) {
+  // Make loading true
+  yield put({
+    type: SHOW_FETCH_LOADING,
+  });
+
   const questionsDataResponse = yield call(getQuestions, action.userId);
   const allQuestions = questionsDataResponse?.data?.data;
   const groupedQuestions = groupBy(allQuestions, (question) => question.group);
@@ -59,6 +66,11 @@ function* fetchAllQuestions(action) {
   yield put({
     payload: todoQuestions,
     type: GET_TODAY_QUESTIONS,
+  });
+
+  // Make loading False -> Questions fetched
+  yield put({
+    type: HIDE_FETCH_LOADING,
   });
 }
 
